@@ -1,9 +1,10 @@
 import { Router } from "express";
+import Task from "../models/Task";
 const router = Router();
 
-router.get("/", (req, res) => {
-  // res.json({ message: "Welcome to your node & mogo-db API" });
-  res.send("Tasks");
+router.get("/", async (req, res) => {
+  const tasks = await Task.find();
+  res.json(tasks);
 });
 
 export default router;
