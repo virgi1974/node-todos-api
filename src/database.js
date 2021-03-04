@@ -7,6 +7,7 @@ import config from "./config";
   const db = await mongoose.connect(config.mongodbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
   console.log("Database connected to: ", db.connection.name);
 })();

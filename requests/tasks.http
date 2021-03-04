@@ -1,0 +1,29 @@
+###
+GET http://localhost:3000/api/tasks
+###
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{
+  "title": "some title xxx",
+  "description": "some description xxx",
+  "done": true
+}
+
+###
+GET http://localhost:3000/api/tasks/603f9fc3b8753dcbc30fcbda
+
+
+###
+DELETE http://localhost:3000/api/tasks/603f8a4271ac8fc94588ab6d0
+
+###
+GET http://localhost:3000/api/tasks/done
+
+###
+PUT http://localhost:3000/api/tasks/6040536463c9deef9cd868d8
+Content-Type: application/json
+
+{
+  "title": "some title zzz"
+}
