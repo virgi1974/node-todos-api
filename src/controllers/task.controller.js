@@ -3,11 +3,26 @@ import { getPagination } from "../libs/getPagination";
 
 export const findAllTasks = async (req, res) => {
   try {
-    const { page, size } = req.query;
+    const { page, size, title } = req.query;
+
+    const condition = title
+      ? {
+          title: { $regex: new RegExp(title), $options: "i" },
+        }
+      : {};
+
     const { limit, offset } = getPagination(page, size);
 
-    const tasks = await Task.paginate({}, { offset: offset, limit: limit });
-    res.json(tasks);
+    const data = await Task.paginate(condition, {
+      offset: offset,
+      limit: limit,
+    });
+    res.json({
+      totalItems: data.totalDocs,
+      totalPages: data.totalPages,
+      tasks: data.docs,
+      currentPage: data.page - 1,
+    });
   } catch (error) {
     res.status(500).json({
       message: error.message || "something went wrong retrieving the tasks",
