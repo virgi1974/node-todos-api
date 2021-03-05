@@ -1,8 +1,12 @@
 import Task from "../models/Task";
+import { getPagination } from "../libs/getPagination";
 
 export const findAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const tasks = await Task.paginate({}, { offset: offset, limit: limit });
     res.json(tasks);
   } catch (error) {
     res.status(500).json({
