@@ -1,4 +1,7 @@
-node_modules/
+# environment variables
 .env
+
+node_modules/
+dist
 
 notes.js
